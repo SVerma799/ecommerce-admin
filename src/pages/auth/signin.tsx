@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { BsGithub, BsGoogle, BsFacebook } from "react-icons/bs";
-
+import Image from "next/image";
 const provider = [
   {
     name: "Github",
@@ -32,6 +32,12 @@ const SignIn = () => {
     return (
       <div className="flex font-signika flex-col items-center justify-center h-screen ">
         <div className="flex flex-col space-y-2 border-2 border-grey-900 p-10 rounded-md">
+          <Image
+            src={session.user?.image ?? ""}
+            width={20}
+            height={20}
+            alt="User Profile Picture"
+          />
           <h1>Signed in as {session.user?.name ?? session.user?.email}</h1>
         </div>
       </div>
