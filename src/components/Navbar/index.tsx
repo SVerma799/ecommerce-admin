@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { FC, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
-import { FaLanguage } from "react-icons/fa";
+import { FaLanguage, FaAffiliatetheme, FaUserCircle } from "react-icons/fa";
 import cn from "classnames";
 import { SelectField } from "../form/Select";
 import { set } from "lodash";
@@ -135,7 +135,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
           <div
             className={cn({
               "white-space-nowrap": true,
-              "flex flex-col gap-2": true,
+              "flex flex-col gap-6": true,
               "p-4": !collapsed,
             })}
           >
@@ -175,18 +175,56 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                   </option>
                 ))}
             </SelectField>
+            {session ? (
+              <div>
+                <button
+                  onClick={async () => {
+                    var data = await signOut({
+                      redirect: false,
+                      callbackUrl: "/",
+                    });
+                    push(data.url);
+                  }}
+                  className="text-white mx-auto w-full bg-indigo-800 rounded-md p-4"
+                >
+                  Sign out
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button
+                  onClick={handleSignIn}
+                  className="text-white mx-auto w-full bg-indigo-800 rounded-md p-4"
+                >
+                  Sign in
+                </button>
+              </div>
+            )}
           </div>
         )}
         {collapsed && (
           <div
             className={cn({
-              "flex flex-col gap-2": true,
+              "flex flex-col gap-6": true,
               "py-4 items-center": true,
               "transition-all duration-500 ease-in-out": true,
             })}
           >
             <button
               className={cn({
+                "transition delay-75 duration-100 ease-in-out": true,
+                "grid place-content-center": true, // position
+                "hover:bg-indigo-800 ": true, // colors
+                "w-10 h-10": true,
+              })}
+              // 👇 set the collapsed state on click
+              onClick={() => setCollapsed(!collapsed)}
+            >
+              <FaLanguage className="w-6 h-6 hover:fill-white text-slate-950 dark:text-white" />
+            </button>
+            <button
+              className={cn({
+                "transition delay-75 duration-100 ease-in-out": true,
                 "grid place-content-center": true, // position
                 "hover:bg-indigo-800 ": true, // colors
                 "w-10 h-10": true, // shape
@@ -194,7 +232,19 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
               // 👇 set the collapsed state on click
               onClick={() => setCollapsed(!collapsed)}
             >
-              <FaLanguage className="w-8 h-8 hover:text-white text-slate-950 dark:text-white" />
+              <FaAffiliatetheme className="w-6 h-6 hover:fill-white text-slate-950 dark:text-white" />
+            </button>
+            <button
+              className={cn({
+                "transition delay-75 duration-100 ease-in-out": true,
+                "grid place-content-center": true, // position
+                "hover:bg-indigo-800 ": true, // colors
+                "w-10 h-10": true, // shape
+              })}
+              // 👇 set the collapsed state on click
+              onClick={() => setCollapsed(!collapsed)}
+            >
+              <FaUserCircle className="w-6 h-6 hover:fill-white text-slate-950 dark:text-white" />
             </button>
           </div>
         )}
