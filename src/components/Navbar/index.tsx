@@ -139,6 +139,15 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
               "p-4": !collapsed,
             })}
           >
+            {session && (
+              <div className=" flex items-center  text-slate-900 dark:text-white">
+                <FaUserCircle className="w-5 h-5 mr-2" />
+                <h1>
+                  <span className="font-bold">Welcome</span>,{" "}
+                  {session?.user?.name}
+                </h1>
+              </div>
+            )}
             <SelectField
               label="Language"
               labelClassName="text-slate-950 dark:text-white"
