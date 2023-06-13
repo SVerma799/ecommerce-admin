@@ -7,6 +7,7 @@ import { FaLanguage, FaAffiliatetheme, FaUserCircle } from "react-icons/fa";
 import cn from "classnames";
 import { SelectField } from "../form/Select";
 import { set } from "lodash";
+import Image from "next/image";
 interface NavbarProps {
   collapsed: boolean;
   setCollapsed(collapsed: boolean): void;
@@ -25,62 +26,6 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
   const handleSignIn = () => {
     push(`/auth/signin?callbackUrl=${asPath}`);
   };
-
-  // return (
-  //   <div>
-  //     <div className="flex gap-2">
-  //       <button
-  //         onClick={() => {
-  //           setTheme("light");
-  //         }}
-  //       >
-  //         Light
-  //       </button>
-  //       <button
-  //         onClick={() => {
-  //           setTheme("dark");
-  //         }}
-  //       >
-  //         Dark
-  //       </button>
-
-  //       {locales &&
-  //         locales.map((locale) => (
-  //           <button
-  //             key={locale}
-  //             className="px-4 py-2 bg-gray-800 text-white rounded-md"
-  //             onClick={() => push("/", undefined, { locale })}
-  //           >
-  //             {locale}
-  //           </button>
-  //         ))}
-  //     </div>
-  //     {session ? (
-  //       <div>
-  //         <button
-  //           onClick={async () => {
-  //             var data = await signOut({
-  //               redirect: false,
-  //               callbackUrl: "/",
-  //             });
-  //             push(data.url);
-  //           }}
-  //         >
-  //           Sign out
-  //         </button>
-  //       </div>
-  //     ) : (
-  //       <div>
-  //         <button
-  //           onClick={handleSignIn}
-  //           className="dark:text-gray-200 text-red-900"
-  //         >
-  //           Sign in
-  //         </button>
-  //       </div>
-  //     )}
-  //   </div>
-  // );
 
   useEffect(() => {
     let persistedTheme = localStorage.getItem("theme") ?? "light";
@@ -139,15 +84,24 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
               "p-4": !collapsed,
             })}
           >
-            {session && (
-              <div className=" flex items-center  text-slate-900 dark:text-white">
+            <div className=" flex items-center  text-slate-900 dark:text-white">
+              {session ? (
+                <Image
+                  src={session?.user?.image!}
+                  alt="user image"
+                  width={30}
+                  height={30}
+                  className="rounded-full mr-2"
+                />
+              ) : (
                 <FaUserCircle className="w-5 h-5 mr-2" />
-                <h1>
-                  <span className="font-bold">Welcome</span>,{" "}
-                  {session?.user?.name}
-                </h1>
-              </div>
-            )}
+              )}
+
+              <h1>
+                <span className="font-bold">Welcome</span>,{" "}
+                {session ? session?.user?.name : "Guest"}
+              </h1>
+            </div>
             <SelectField
               label="Language"
               labelClassName="text-slate-950 dark:text-white"
