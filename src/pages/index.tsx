@@ -23,7 +23,6 @@ export default function Home() {
         />
       </div>
       <main className="font-signika">
-        <h1>Next.js + TypeScript + Tailwind CSS + Google Fonts</h1>
         <p>{t("SomeText")} </p>
       </main>
     </>

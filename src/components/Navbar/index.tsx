@@ -1,11 +1,12 @@
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { FaLanguage } from "react-icons/fa";
 import cn from "classnames";
 import { SelectField } from "../form/Select";
+import { set } from "lodash";
 interface NavbarProps {
   collapsed: boolean;
   setCollapsed(collapsed: boolean): void;
@@ -13,11 +14,12 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
   const { theme, setTheme } = useTheme();
+
   const themes = ["light", "dark"];
 
   const { data: session } = useSession();
   // SV: Push is used to push to specific route,
-  //    asPath is used to get the current route
+  // asPath is used to get the current route
   const { locale, locales, push, asPath } = useRouter();
 
   const handleSignIn = () => {
@@ -79,6 +81,15 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
   //     )}
   //   </div>
   // );
+
+  useEffect(() => {
+    let persistedTheme = localStorage.getItem("theme") ?? "light";
+    if (persistedTheme === "system") {
+      persistedTheme = "light";
+    }
+    console.log("persistedTheme", persistedTheme);
+    setTheme(persistedTheme);
+  }, [setTheme]);
 
   const Icon = collapsed ? RxHamburgerMenu : RxCross1;
   return (
@@ -155,15 +166,12 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
               onChange={(e: any) => {
                 setTheme(e.target.value);
               }}
+              value={theme}
             >
               {themes &&
-                themes.map((theme) => (
-                  <option
-                    key={theme}
-                    value={theme}
-                    onClick={() => setTheme(theme)}
-                  >
-                    {theme}
+                themes.map((themeVal) => (
+                  <option key={themeVal} value={themeVal}>
+                    {themeVal}
                   </option>
                 ))}
             </SelectField>
