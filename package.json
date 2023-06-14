@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prettier:fix": "prettier --write \"**/*.{ts,tsx,js,jsx}\"",
+    "prettier:check": "prettier --check \"**/*.{ts,tsx,js,jsx}\"",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run --config video=false"
   },
