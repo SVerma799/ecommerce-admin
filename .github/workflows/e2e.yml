@@ -1,0 +1,30 @@
+name: Cypress Tests
+
+on: [push]
+
+#  My basic workflow over here is to make sure I have
+#  Dependencies installed, build the app, start the app,
+# wait for the app to start, and then run the tests.
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Dependecies
+        run: yarn install
+      - name: Build App
+        run: yarn build
+      - name: Start App
+        run: yarn start &
+      - name: Wait for App to Start
+        run: |
+          n=0
+          until [ $n -ge 15 ]
+          do
+            curl -s http://localhost:3000 && break
+            n=$((n+1))
+            sleep 1
+          done
+      - name: Run E2E Tests
+        run: yarn cypress:run
