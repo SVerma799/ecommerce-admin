@@ -6,5 +6,11 @@
   "SignIn": "Sign In",
   "CheckingAuthentication": "Checking Authentication",
   "SignedInAs": "Signed in as",
-  "With": "with"
+  "With": "with",
+  "Dashboard": "Dashboard",
+  "Products": "Products",
+  "Orders": "Orders",
+  "Languages": "Languages",
+  "Themes": "Themes",
+  "Profile": "Profile"
 }

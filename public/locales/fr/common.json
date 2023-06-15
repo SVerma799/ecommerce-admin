@@ -6,5 +6,11 @@
   "SignIn": "Connexion",
   "CheckingAuthentication": "Vérification de l'authentification",
   "SignedInAs": "Connecté en tant que ",
-  "With": "avec"
+  "With": "avec",
+  "Dashboard": "Tableau de bord",
+  "Products": "Produits",
+  "Orders": "Commandes",
+  "Languages": "Langues",
+  "Themes": "Thèmes",
+  "Profile": "Profil"
 }

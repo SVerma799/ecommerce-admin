@@ -18,7 +18,7 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       gridTemplateColumns: {
-        sidebar: "300px auto", //for sidebar layout
+        sidebar: "250px auto", //for sidebar layout
         "sidebar-collapsed": "64px auto", //for collapsed sidebar layout
       },
     },
