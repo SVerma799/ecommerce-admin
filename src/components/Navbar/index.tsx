@@ -4,11 +4,13 @@ import { FC, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { FaLanguage, FaAffiliatetheme, FaUserCircle } from "react-icons/fa";
+import { CiLogin } from "react-icons/ci";
 import { GiShoppingBag } from "react-icons/gi";
 import cn from "classnames";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import { SelectField } from "../form/Select";
+import { Button } from "../form/button";
 
 interface NavbarProps {
   collapsed: boolean;
@@ -60,7 +62,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
         >
           {!collapsed && (
             <div className="flex items-center gap-2">
-              <GiShoppingBag className="w-10 h-10 text-indigo-800 dark:text-white" />
+              <GiShoppingBag className="w-10 h-10 text-indigo-800" />
               <h1 className="text-3xl whitespace-nowrap font-bold  dark:text-white text-slate-950">
                 Ecommerce
               </h1>
@@ -143,7 +145,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
             </SelectField>
             {session ? (
               <div>
-                <button
+                <Button
                   onClick={async () => {
                     const data = await signOut({
                       redirect: false,
@@ -151,19 +153,21 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                     });
                     push(data.url);
                   }}
-                  className="text-white mx-auto w-full bg-indigo-800 rounded-md p-4"
                 >
                   {t("SignOut")}
-                </button>
+                </Button>
               </div>
             ) : (
               <div>
-                <button
+                <Button
                   onClick={handleSignIn}
-                  className="text-white mx-auto w-full bg-indigo-800 rounded-md p-4"
+                  rootClass="w-full item-center"
+                  inputClass=" text-white mx-auto w-full bg-indigo-800 rounded-md p-4"
+                  icon={CiLogin}
+                  iconClassNames="w-6 h-6 flex"
                 >
                   {t("SignIn")}
-                </button>
+                </Button>
               </div>
             )}
           </div>

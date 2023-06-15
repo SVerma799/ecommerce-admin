@@ -4,37 +4,33 @@ import Image from "next/image";
 
 const ButtonComponent = (props: any, ref: any) => {
   const {
-    rootClass,
     required,
-    inputClass,
+    buttonClass,
     icon,
     alt,
-    iconContainerClassName,
     iconClassNames,
+    ImageSrc,
     ...inputProps
   } = props;
   return (
-    <div className={`flex flex-col ${rootClass}`}>
-      <div className={`${icon ? "relative" : ""}`}>
-        <button
-          className={`bg-indigo-800 hover:bg-white hover:text-slate-950  border border-transparent hover:border-indigo-800 ${inputClass}`}
-          {...inputProps}
-          required={required}
-          ref={ref}
-        >
-          {props.children}
-        </button>
-        {icon && (
-          // right -0 have to provide icon container class
-          // Icon class fill-current h-4 w-4
-          <div
-            className={`pointer-events-none absolute inset-y-0 x flex items-center px-2 text-gray-700 ${iconContainerClassName}`}
-          >
-            <Image src={icon} alt={alt} className={iconClassNames} />
-          </div>
-        )}
-      </div>
-    </div>
+    <button
+      className={`flex items-center justify-center bg-indigo-800  hover:text-slate-950  border-2 border-transparent hover:border-indigo-800  hover:bg-slate-50 gap-2 text-white mx-auto w-full rounded-md p-4 ${buttonClass}`}
+      {...inputProps}
+      required={required}
+      ref={ref}
+    >
+      {props.children}
+      {(ImageSrc || icon) && (
+        // right -0 have to provide icon container class
+        // Icon class fill-current h-4 w-4
+        <>
+          {ImageSrc && (
+            <Image src={ImageSrc} alt={alt} className={iconClassNames} />
+          )}
+          {icon && <props.icon className={iconClassNames} />}
+        </>
+      )}
+    </button>
   );
 };
 
