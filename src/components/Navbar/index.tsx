@@ -4,6 +4,7 @@ import { FC, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { FaLanguage, FaAffiliatetheme, FaUserCircle } from "react-icons/fa";
+import { GiShoppingBag } from "react-icons/gi";
 import cn from "classnames";
 import Image from "next/image";
 import { useTranslation } from "next-i18next";
@@ -58,7 +59,8 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
           })}
         >
           {!collapsed && (
-            <div>
+            <div className="flex items-center gap-2">
+              <GiShoppingBag className="w-10 h-10 text-indigo-800 dark:text-white" />
               <h1 className="text-3xl whitespace-nowrap font-bold  dark:text-white text-slate-950">
                 Ecommerce
               </h1>

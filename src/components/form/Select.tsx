@@ -1,51 +1,6 @@
 import _ from "lodash";
 import React from "react";
-import classNames from "classnames";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-import ReactTooltip from "react-tooltip";
-
-const InfoTip = ({ text }: { text: string }) => {
-  if (!text) return null;
-
-  return (
-    <span className="float-right pt-2 pr-2">
-      <AiOutlineInfoCircle className="text-neutral-grey-2" data-tip={text} />{" "}
-      <ReactTooltip
-        className="w-1/2 lg:w-1/4"
-        textColor="var(--colors-natural-dark)"
-        backgroundColor="var(--colors-natural-grey-4)"
-      />
-    </span>
-  );
-};
-
-const Label = ({
-  name,
-  label,
-  required,
-  infoText,
-  className,
-  bold,
-}: {
-  name: string;
-  infoText?: string;
-  label: string;
-  className?: string;
-  required?: boolean;
-  bold?: boolean;
-}) => (
-  <label
-    htmlFor={name}
-    className={classNames(
-      className || "text-granite mb-2",
-      bold ? "font-bold" : ""
-    )}
-  >
-    {label}
-    {required && <span className="text-arbutus">{" *"}</span>}
-    {infoText && <InfoTip text={infoText} />}
-  </label>
-);
+import { Label } from "./Label";
 
 const SelectFieldComponent = (props: any, ref: any) => {
   const {
