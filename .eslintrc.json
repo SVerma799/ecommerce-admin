@@ -5,15 +5,14 @@
     "cypress/globals": true
   },
   "extends": [
-    "plugin: react/recommended",
-    "airbnb",
-    "plugin: @typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
     "eslint:recommended",
-    "plugin: cypress/recommended",
     "next/core-web-vitals",
-    "plugin: import/typescript",
+    "airbnb",
+    "plugin:import/typescript",
     "prettier",
-    "plugin: testing-library/react"
+    "plugin:cypress/recommended"
   ],
   "overrides": [
     // Only uses Testing Library lint rules in test files
@@ -116,7 +115,7 @@
       }
     ]
   },
-  "ignorePatterns": ["**/*.js", "/build/*.js"],
+  "ignorePatterns": ["**/*.js", "/build/*.js", "database/*.tsx"],
   "settings": {
     "import/resolver": {
       "node": {

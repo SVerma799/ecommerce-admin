@@ -1,7 +1,4 @@
-import { useFormContext } from "react-hook-form";
 import _ from "lodash";
-import { useTranslation } from "next-i18next";
-import Image from "next/image";
 import React from "react";
 import classNames from "classnames";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -59,9 +56,6 @@ const SelectFieldComponent = (props: any, ref: any) => {
     required,
     inputClass,
     icon,
-    alt,
-    iconContainerClassName,
-    iconClassNames,
     ...inputProps
   } = props;
   return (

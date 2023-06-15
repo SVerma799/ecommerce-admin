@@ -1,3 +1,10 @@
 {
-  "SomeText": "This is some text in English"
+  "SomeText": "This is some text in English",
+  "Welcome": "Welcome",
+  "Guest": "Guest",
+  "SignOut": "Sign Out",
+  "SignIn": "Sign In",
+  "CheckingAuthentication": "Checking Authentication",
+  "SignedInAs": "Signed in as",
+  "With": "with"
 }

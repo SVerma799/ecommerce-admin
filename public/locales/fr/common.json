@@ -1,3 +1,10 @@
 {
-  "SomeText": "Ceci est un texte en anglais"
+  "SomeText": "Ceci est un texte en anglais",
+  "Welcome": "Bienvenue",
+  "Guest": "Invité",
+  "SignOut": "Déconnexion",
+  "SignIn": "Connexion",
+  "CheckingAuthentication": "Vérification de l'authentification",
+  "SignedInAs": "Connecté en tant que ",
+  "With": "avec"
 }

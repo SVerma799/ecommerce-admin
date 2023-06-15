@@ -5,9 +5,10 @@ import { useTheme } from "next-themes";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { FaLanguage, FaAffiliatetheme, FaUserCircle } from "react-icons/fa";
 import cn from "classnames";
-import { SelectField } from "../form/Select";
-import { set } from "lodash";
 import Image from "next/image";
+import { useTranslation } from "next-i18next";
+import { SelectField } from "../form/Select";
+
 interface NavbarProps {
   collapsed: boolean;
   setCollapsed(collapsed: boolean): void;
@@ -15,13 +16,14 @@ interface NavbarProps {
 
 const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
   const { theme, setTheme } = useTheme();
+  const { t } = useTranslation("common");
 
   const themes = ["light", "dark"];
 
   const { data: session } = useSession();
   // SV: Push is used to push to specific route,
   // asPath is used to get the current route
-  const { locale, locales, push, asPath } = useRouter();
+  const { locales, push, asPath } = useRouter();
 
   const handleSignIn = () => {
     push(`/auth/signin?callbackUrl=${asPath}`);
@@ -32,7 +34,6 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
     if (persistedTheme === "system") {
       persistedTheme = "light";
     }
-    console.log("persistedTheme", persistedTheme);
     setTheme(persistedTheme);
   }, [setTheme]);
 
@@ -87,7 +88,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
             <div className=" flex items-center  text-slate-900 dark:text-white">
               {session ? (
                 <Image
-                  src={session?.user?.image!}
+                  src={session?.user?.image ?? ""}
                   alt="user image"
                   width={30}
                   height={30}
@@ -98,8 +99,8 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
               )}
 
               <h1>
-                <span className="font-bold">Welcome</span>,{" "}
-                {session ? session?.user?.name : "Guest"}
+                <span className="font-bold">{t("Welcome")}</span>,{" "}
+                {session ? session?.user?.name : t("Guest")}
               </h1>
             </div>
             <SelectField
@@ -142,7 +143,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
               <div>
                 <button
                   onClick={async () => {
-                    var data = await signOut({
+                    const data = await signOut({
                       redirect: false,
                       callbackUrl: "/",
                     });
@@ -150,7 +151,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                   }}
                   className="text-white mx-auto w-full bg-indigo-800 rounded-md p-4"
                 >
-                  Sign out
+                  {t("SignOut")}
                 </button>
               </div>
             ) : (
@@ -159,7 +160,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                   onClick={handleSignIn}
                   className="text-white mx-auto w-full bg-indigo-800 rounded-md p-4"
                 >
-                  Sign in
+                  {t("SignIn")}
                 </button>
               </div>
             )}
