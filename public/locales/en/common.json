@@ -2,8 +2,8 @@
   "SomeText": "This is some text in English",
   "Welcome": "Welcome",
   "Guest": "Guest",
-  "SignOut": "Sign Out",
-  "SignIn": "Sign In",
+  "SignOut": "SignOut",
+  "SignIn": "SignIn",
   "CheckingAuthentication": "Checking Authentication",
   "SignedInAs": "Signed in as",
   "With": "with",
@@ -12,5 +12,7 @@
   "Orders": "Orders",
   "Languages": "Languages",
   "Themes": "Themes",
-  "Profile": "Profile"
+  "Profile": "Profile",
+  "User": "User",
+  "Settings": "Settings"
 }

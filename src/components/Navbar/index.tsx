@@ -1,16 +1,21 @@
-// import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { useRouter, usePathname } from "next/navigation";
 import { FC } from "react";
 // import { useTheme } from "next-themes";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
-// import { CiLogin } from "react-icons/ci";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { GiShoppingBag } from "react-icons/gi";
 import { RiProductHuntLine } from "react-icons/ri";
-import { MdOutlineSpaceDashboard, MdFavoriteBorder } from "react-icons/md";
+import {
+  MdOutlineSpaceDashboard,
+  MdFavoriteBorder,
+  MdOutlineSettings,
+} from "react-icons/md";
+import { FaRegUserCircle } from "react-icons/fa";
 import cn from "classnames";
 // import Image from "next/image";
 import { useTranslation } from "next-i18next";
+import Link from "next/link";
 // import { SelectField } from "../form/Select";
 // import { Button } from "../form/button";
 
@@ -22,18 +27,13 @@ interface NavbarProps {
 const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
   // const { theme, setTheme } = useTheme();
   const { t } = useTranslation("common");
-
   // const themes = ["light", "dark"];
 
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   // SV: Push is used to push to specific route,
   // asPath is used to get the current route
   // const { locales, push, asPath } = useRouter();
   const { push } = useRouter();
-
-  // const handleSignIn = () => {
-  //   push(`/auth/signin?callbackUrl=${asPath}`);
-  // };
 
   // useEffect(() => {
   //   let persistedTheme = localStorage.getItem("theme") ?? "light";
@@ -75,9 +75,11 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
             {!collapsed && (
               <div className="flex items-center gap-2">
                 <GiShoppingBag className="w-7 h-7 text-indigo-800" />
-                <h1 className="text-xl whitespace-nowrap font-bold  dark:text-white text-slate-950">
-                  Ecommerce
-                </h1>
+                <Link href="/">
+                  <h1 className="text-xl whitespace-nowrap font-bold  dark:text-white text-slate-950">
+                    Ecommerce
+                  </h1>
+                </Link>
               </div>
             )}
             <button
@@ -123,7 +125,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                 <MdOutlineSpaceDashboard className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className="text-md  text-slate-950 dark:text-white">
+                <text className="transition delay-75 duration-100 ease-in-out text-md  text-slate-950 dark:text-white">
                   {t("Dashboard")}
                 </text>
               )}
@@ -149,7 +151,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                 <RiProductHuntLine className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className="text-md  text-slate-950 dark:text-white">
+                <text className="transition delay-75 duration-100 ease-in-out text-md  text-slate-950 dark:text-white">
                   {t("Products")}
                 </text>
               )}
@@ -175,7 +177,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                 <MdFavoriteBorder className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className="text-md  text-slate-950 dark:text-white">
+                <text className=" transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
                   {t("Orders")}
                 </text>
               )}
@@ -201,8 +203,60 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                 <AiOutlineUnorderedList className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className="text-md  text-slate-950 dark:text-white">
+                <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
                   {t("Categories")}
+                </text>
+              )}
+            </div>
+            <div
+              className="flex gap-4 items-center"
+              onClick={() => {
+                push("/admin/Settings");
+              }}
+              onKeyDown={() => {
+                push("/admin/Settings");
+              }}
+              role="button"
+              tabIndex={0}
+            >
+              <button
+                className={cn({
+                  "transition delay-75 duration-100 ease-in-out  flex items-center  gap-4 text-slate-950 dark:text-white text-lg":
+                    true,
+                })}
+                onClick={() => push("/admin/Settings")}
+              >
+                <MdOutlineSettings className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
+              </button>
+              {!collapsed && (
+                <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
+                  {t("Settings")}
+                </text>
+              )}
+            </div>
+            <div
+              className="flex gap-4 items-center"
+              onClick={() => {
+                push(`/auth/signin?callbackUrl=${usePathname}`);
+              }}
+              onKeyDown={() => {
+                push(`/auth/signin?callbackUrl=${usePathname}`);
+              }}
+              role="button"
+              tabIndex={0}
+            >
+              <button
+                className={cn({
+                  "transition delay-75 duration-100 ease-in-out  flex items-center  gap-4 text-slate-950 dark:text-white text-lg":
+                    true,
+                })}
+                onClick={() => push(`/auth/signin?callbackUrl=${usePathname}`)}
+              >
+                <FaRegUserCircle className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
+              </button>
+              {!collapsed && (
+                <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
+                  {session ? t("SignOut") : t("SignIn")}
                 </text>
               )}
             </div>

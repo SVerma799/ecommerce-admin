@@ -29,7 +29,7 @@ export default NextAuth({
   },
   callbacks: {
     async session(session, user) {
-      if (adminEmails.included(user.email)) {
+      if (user && adminEmails.included(user?.email)) {
         return session;
       } else {
         return false;
