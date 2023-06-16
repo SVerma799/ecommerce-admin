@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
-import { FC } from "react";
+import { FC, useState } from "react";
 // import { useTheme } from "next-themes";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { AiOutlineUnorderedList } from "react-icons/ai";
@@ -19,13 +19,11 @@ import Link from "next/link";
 // import { SelectField } from "../form/Select";
 // import { Button } from "../form/button";
 
-interface NavbarProps {
-  collapsed: boolean;
-  setCollapsed(collapsed: boolean): void;
-}
-
-const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
+const Navbar: FC = () => {
   // const { theme, setTheme } = useTheme();
+
+  const [collapsed, setSidebarCollapsed] = useState<boolean>(true);
+
   const { t } = useTranslation("common");
   // const themes = ["light", "dark"];
 
@@ -90,7 +88,7 @@ const Navbar: FC<NavbarProps> = ({ collapsed, setCollapsed }) => {
                 "w-7 h-7": true, // shape
               })}
               // 👇 set the collapsed state on click
-              onClick={() => setCollapsed(!collapsed)}
+              onClick={() => setSidebarCollapsed(!collapsed)}
             >
               <Icon className="w-6 h-6 hover:text-white text-slate-950 dark:text-white" />
             </button>
