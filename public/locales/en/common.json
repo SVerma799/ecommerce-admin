@@ -8,12 +8,10 @@
   "SignedInAs": "Signed in as",
   "With": "with",
   "Dashboard": "Dashboard",
-  "Products": "Products",
   "Orders": "Orders",
   "Languages": "Languages",
   "Themes": "Themes",
   "Profile": "Profile",
   "User": "User",
-  "Settings": "Settings",
-  "Add_Products": "Add Products"
+  "Settings": "Settings"
 }

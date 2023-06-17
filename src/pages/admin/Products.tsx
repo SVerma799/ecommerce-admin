@@ -6,22 +6,26 @@ import { useTranslation } from "next-i18next";
 import AddProduct from "@/components/admin/Products/AddProduct";
 
 const Products: FC = () => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(["Product"]);
   const [showAddProduct, setShowAddProduct] = useState<boolean>(false);
   return (
     <div className="flex gap-2">
       <Navbar />
-      <div className="w-full flex flex-col p-7">
-        <h1 className="text-3xl">{t("Products")}</h1>
-        <Button
-          buttonClass="w-[10%] mt-5"
-          onClick={() => setShowAddProduct(true)}
-        >
-          {t("Add_Products")}
-        </Button>
-
+      <div className="w-1/2 flex flex-col p-7">
         {/* ********************************** Add Product Comp *********************** */}
-        {showAddProduct && <AddProduct />}
+        {showAddProduct ? (
+          <AddProduct />
+        ) : (
+          <>
+            <h1 className="text-3xl">{t("Products")}</h1>
+            <Button
+              buttonClass="w-[20%] mt-5"
+              onClick={() => setShowAddProduct(true)}
+            >
+              {t("Add_Products")}
+            </Button>
+          </>
+        )}
         {/* ********************************** Add Product Comp *********************** */}
       </div>
     </div>
@@ -32,7 +36,7 @@ export default Products;
 export async function getStaticProps({ locale }: any) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common"])),
+      ...(await serverSideTranslations(locale, ["common", "Product"])),
     },
   };
 }

@@ -8,12 +8,10 @@
   "SignedInAs": "Connecté en tant que ",
   "With": "avec",
   "Dashboard": "Tableau de bord",
-  "Products": "Produits",
   "Orders": "Commandes",
   "Languages": "Langues",
   "Themes": "Thèmes",
   "Profile": "Profil",
   "User": "Utilisateur",
-  "Settings": "Paramètres",
-  "Add_Products": "Ajouter des produits"
+  "Settings": "Paramètres"
 }
