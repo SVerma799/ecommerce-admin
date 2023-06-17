@@ -3,7 +3,6 @@
 import { useSession } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import { FC, useState } from "react";
-// import { useTheme } from "next-themes";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { AiOutlineUnorderedList } from "react-icons/ai";
 import { GiShoppingBag } from "react-icons/gi";
@@ -15,33 +14,17 @@ import {
 } from "react-icons/md";
 import { FaRegUserCircle } from "react-icons/fa";
 import cn from "classnames";
-// import Image from "next/image";
 import { useTranslation } from "next-i18next";
 import Link from "next/link";
-// import { SelectField } from "../form/Select";
-// import { Button } from "../form/button";
 
 const Navbar: FC = () => {
-  // const { theme, setTheme } = useTheme();
-
   const [collapsed, setSidebarCollapsed] = useState<boolean>(true);
-
   const { t } = useTranslation("common");
-  // const themes = ["light", "dark"];
-
   const { data: session } = useSession();
   // SV: Push is used to push to specific route,
   // asPath is used to get the current route
   // const { locales, push, asPath } = useRouter();
   const { push } = useRouter();
-
-  // useEffect(() => {
-  //   let persistedTheme = localStorage.getItem("theme") ?? "light";
-  //   if (persistedTheme === "system") {
-  //     persistedTheme = "light";
-  //   }
-  //   setTheme(persistedTheme);
-  // }, [setTheme]);
 
   const Icon = collapsed ? RxHamburgerMenu : RxCross1;
 
@@ -85,8 +68,8 @@ const Navbar: FC = () => {
             <button
               title="Language"
               className={cn({
-                "grid place-content-center": true, // position
-                "hover:bg-indigo-800 ": true, // colors
+                "grid place-content-center": true,
+                "hover:fill-indigo-900": true, // position
                 "w-7 h-7": true, // shape
               })}
               // 👇 set the collapsed state on click
@@ -122,7 +105,7 @@ const Navbar: FC = () => {
                 })}
                 onClick={() => push("/admin/Dashboard")}
               >
-                <MdOutlineSpaceDashboard className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
+                <MdOutlineSpaceDashboard className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
                 <text className="transition delay-75 duration-100 ease-in-out text-md  text-slate-950 dark:text-white">
@@ -148,7 +131,7 @@ const Navbar: FC = () => {
                 })}
                 onClick={() => push("/admin/Products")}
               >
-                <RiProductHuntLine className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
+                <RiProductHuntLine className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
                 <text className="transition delay-75 duration-100 ease-in-out text-md  text-slate-950 dark:text-white">
@@ -174,7 +157,7 @@ const Navbar: FC = () => {
                 })}
                 onClick={() => push("/admin/Orders")}
               >
-                <MdFavoriteBorder className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
+                <MdFavoriteBorder className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
                 <text className=" transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
@@ -200,7 +183,7 @@ const Navbar: FC = () => {
                 })}
                 onClick={() => push("/admin/Categories")}
               >
-                <AiOutlineUnorderedList className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
+                <AiOutlineUnorderedList className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
                 <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
@@ -226,7 +209,7 @@ const Navbar: FC = () => {
                 })}
                 onClick={() => push("/admin/Settings")}
               >
-                <MdOutlineSettings className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
+                <MdOutlineSettings className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
                 <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
@@ -252,7 +235,7 @@ const Navbar: FC = () => {
                 })}
                 onClick={() => push(`/auth/signin?callbackUrl=${usePathname}`)}
               >
-                <FaRegUserCircle className="w-7 h-7 hover:fill-white text-slate-950 dark:text-white" />
+                <FaRegUserCircle className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
                 <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
