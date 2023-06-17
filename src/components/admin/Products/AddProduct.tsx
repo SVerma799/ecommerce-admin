@@ -1,3 +1,4 @@
+import InputField from "@/components/form/InputField";
 import { useTranslation } from "next-i18next";
 import { FC } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -7,10 +8,7 @@ const AddProduct: FC = () => {
   const form = useForm({
     defaultValues: {},
   });
-  const { handleSubmit, formState } = useForm();
-
-  const { errors } = formState;
-
+  const { handleSubmit } = useForm();
   const onSubmit = () => {};
 
   return (
@@ -19,18 +17,15 @@ const AddProduct: FC = () => {
       <FormProvider {...form}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-2">
-            <div className="flex flex-col gap-2">
-              <label htmlFor="name">{t("Name")}</label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                className="border border-gray-300 rounded-md p-2"
-              />
-              {errors.name && (
-                <span className="text-red-500">{t("Required")}</span>
-              )}
-            </div>
+            <InputField
+              label={t("Name")}
+              labelClassName="text-md"
+              rootClass="flex flex-col"
+              name="name"
+              required
+              inputClass="border border-slate-950 bg-white focus:outline-indigo-800  p-2 mt-2 rounded"
+              placeholder={t("Name")}
+            />
           </div>
         </form>
       </FormProvider>

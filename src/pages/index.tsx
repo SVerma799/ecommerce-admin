@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className="flex gap-2">
       <Navbar />
-      <main className="font-signika">
+      <main>
         <p>{t("SomeText")} </p>
       </main>
     </div>
