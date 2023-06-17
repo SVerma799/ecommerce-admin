@@ -11,7 +11,7 @@ const Products: FC = () => {
   return (
     <div className="flex gap-2">
       <Navbar />
-      <div className="w-1/2 flex flex-col p-7">
+      <div className="w-full flex flex-col p-7">
         {/* ********************************** Add Product Comp *********************** */}
         {showAddProduct ? (
           <AddProduct />
