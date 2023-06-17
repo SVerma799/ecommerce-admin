@@ -2,5 +2,7 @@
   "NewProduct": "New Product",
   "Add_Products": "Ajouter des produits",
   "Products": "Produits",
-  "Name": "Nom"
+  "Name": "Nom",
+  "Price": "Prix",
+  "Description": "Description"
 }
