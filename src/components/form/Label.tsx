@@ -25,7 +25,7 @@ const LabelComp = ({
     )}
   >
     {label}
-    {required && <span className="text-arbutus">{" *"}</span>}
+    {required && <span className="text-red">{" *"}</span>}
     {infoText && <InfoTip text={infoText} />}
   </label>
 );

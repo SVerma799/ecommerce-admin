@@ -4,5 +4,7 @@
   "Products": "Produits",
   "Name": "Nom",
   "Price": "Prix",
-  "Description": "Description"
+  "Description": "Description",
+  "Image": "Image",
+  "Submit": "Soumettre"
 }

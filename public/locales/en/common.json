@@ -13,5 +13,6 @@
   "Themes": "Themes",
   "Profile": "Profile",
   "User": "User",
-  "Settings": "Settings"
+  "Settings": "Settings",
+  "thisFieldIsRequired": "This field is required"
 }

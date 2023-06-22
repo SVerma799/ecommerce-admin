@@ -6,10 +6,10 @@ import { Label } from "./Label";
 
 const ErrorLabel = (props: any) => {
   const { error, className, ...otherProps } = props;
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   return (
-    <small className={`${className} text-red`} {...otherProps}>
+    <small className={`${className} text-red-600`} {...otherProps}>
       {error &&
         (error.type === "required" && !error.message
           ? t("thisFieldIsRequired")
@@ -30,6 +30,7 @@ const InputFieldComponent = (props: any, ref: any) => {
   } = props;
   const { errors } = useFormContext();
   const error = _.get(errors, inputProps.name);
+  const hasError = !!error;
 
   return (
     <div className={rootClass}>
@@ -37,13 +38,18 @@ const InputFieldComponent = (props: any, ref: any) => {
         <Label
           name={inputProps.name}
           label={label}
-          className={labelClassName}
           required={required}
+          className={labelClassName}
           infoText={infoText}
         />
       )}
       <input
-        className={`border border-slate-950 text-slate-950 bg-white focus:outline-indigo-800  p-2 mt-2 rounded ${inputClass}`}
+        data-testid={inputProps.name}
+        className={`border border-slate-950 text-slate-950 bg-white   p-2 mt-2 rounded ${
+          hasError
+            ? "outline-red-600 border-red-600 focus:border-red-600"
+            : "border-indigo-800 focus:border-indigo-800 focus:outline-indigo-800"
+        }  focus:border-indigo-800 ${inputClass}`}
         ref={ref}
         {...inputProps}
       />
@@ -64,21 +70,67 @@ const TextAreaFieldComponent = (props: any, ref: any) => {
   } = props;
   const { errors } = useFormContext();
   const error = _.get(errors, inputProps.name);
-
+  const hasError = !!error;
   return (
     <div className={rootClass}>
       {label && (
         <Label
           name={inputProps.name}
           label={label}
-          className={labelClassName}
           required={required}
+          className={labelClassName}
           infoText={infoText}
         />
       )}
       <textarea
-        className={`border border-slate-950 text-slate-950 bg-white focus:outline-indigo-800  p-2 mt-2 rounded ${inputClass}`}
+        className={`border border-slate-950 text-slate-950 bg-white ${
+          hasError
+            ? "outline-red-600 border-red-600 focus:border-red-600"
+            : "border-indigo-800 focus:border-indigo-800 focus:outline-indigo-800"
+        }  focus:border-indigo-800  p-2 mt-2 rounded ${inputClass}`}
         ref={ref}
+        {...inputProps}
+      />
+      {error && <ErrorLabel error={error} />}
+    </div>
+  );
+};
+
+const ImageFieldComponent = (props: any, ref: any) => {
+  const {
+    label,
+    labelClassName,
+    rootClass,
+    required,
+    infoText,
+    inputClass,
+    ...inputProps
+  } = props;
+
+  const { errors } = useFormContext();
+  const error = _.get(errors, inputProps.name);
+  const hasError = !!error;
+  return (
+    <div className={rootClass}>
+      {label && (
+        <Label
+          name={inputProps.name}
+          label={label}
+          className={`${
+            hasError ? "text-red-600 " : "text-slate-950"
+          }${labelClassName}`}
+          required={required}
+          infoText={infoText}
+        />
+      )}
+      <input
+        className={`border border-slate-950 text-slate-950 bg-white focus:outline-indigo-800  p-2 mt-2 rounded ${
+          hasError
+            ? "outline-red-600 border-red-600 focus:border-red-600"
+            : "border-indigo-800 focus:border-indigo-800"
+        } ${inputClass}`}
+        ref={ref}
+        type="file"
         {...inputProps}
       />
       {error && <ErrorLabel error={error} />}
@@ -88,5 +140,6 @@ const TextAreaFieldComponent = (props: any, ref: any) => {
 
 const InputField = forwardRef(InputFieldComponent);
 const TextAreaField = forwardRef(TextAreaFieldComponent);
+const ImageField = forwardRef(ImageFieldComponent);
 
-export { InputField, TextAreaField };
+export { InputField, TextAreaField, ImageField };
