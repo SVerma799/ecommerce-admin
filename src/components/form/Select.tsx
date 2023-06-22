@@ -24,7 +24,7 @@ const SelectFieldComponent = (props: any, ref: any) => {
       />
       <div className={`${icon ? "relative" : ""}`}>
         <select
-          className={`block appearance-none w-full border border-gray-200 hovers:border-gray-300 px-4 py-2  rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-300 ${inputClass}`}
+          className={`block appearance-none w-full border border-gray-200 hovers:border-gray-300 px-4 py-2  rounded leading-tight focus:outline-none focus:border-gray-300 ${inputClass}`}
           {...inputProps}
           required={required}
           ref={ref}
