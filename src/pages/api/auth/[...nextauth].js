@@ -5,7 +5,7 @@ import GithubProvider from "next-auth/providers/github";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "../../../../database/connectDB";
 
-const adminEmails = ["vshubham799@gmail.com", "prakashvulli22@gmail.com"];
+const adminEmails = ["vshubham799@gmail.com"];
 
 export default NextAuth({
   // Configure one or more authentication providers
@@ -38,3 +38,12 @@ export default NextAuth({
   },
   adapter: MongoDBAdapter(clientPromise),
 });
+
+export async function isAdminRequest(req, res) {
+  const session = await getServerSession(req, res, authOptions);
+  if (!adminEmails.includes(session?.user?.email)) {
+    res.status(401);
+    res.end();
+    throw "not an admin";
+  }
+}
