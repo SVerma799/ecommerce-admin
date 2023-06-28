@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Product } from "../../../../Models/Product";
-import { connectMongoose } from "../../../../database/mongoose";
+import { Product } from "../../../../../Models/Product";
+import { connectMongoose } from "../../../../../database/mongoose";
 
 export default async function handler(
   req: NextApiRequest,
