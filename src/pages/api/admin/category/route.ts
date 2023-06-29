@@ -2,6 +2,13 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Category } from "../../../../../Models/Category";
 import { connectMongoose } from "../../../../../database/mongoose";
 
+/**
+ * Handles the requests to the /api/admin/category route
+ *
+ * @export
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ */
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -25,6 +32,13 @@ export default async function handler(
   }
 }
 
+/**
+ * Handles the GET requests to the /api/admin/category route
+ *
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ * @return {*}
+ */
 async function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
   try {
     if (req.query?.id) {
@@ -38,6 +52,13 @@ async function handleGetRequest(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
+/**
+ * Handles the POST requests to the /api/admin/category route
+ *
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ * @return {*}
+ */
 async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
   try {
     const category = await Category.create(req.body);
@@ -46,6 +67,14 @@ async function handlePostRequest(req: NextApiRequest, res: NextApiResponse) {
     return res.status(500).json({ error });
   }
 }
+
+/**
+ * Handles the DELETE requests to the /api/admin/category route
+ *
+ * @param {NextApiRequest} req
+ * @param {NextApiResponse} res
+ * @return {*}
+ */
 async function handleDeleteRequest(req: NextApiRequest, res: NextApiResponse) {
   try {
     const category = await Category.deleteOne(req.body);
