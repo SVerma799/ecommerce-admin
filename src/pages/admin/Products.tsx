@@ -1,13 +1,38 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
+import axios from "axios";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/form/button";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import ProductComp from "@/components/admin/Products/ProductComp";
 import AddProduct from "@/components/admin/Products/AddProduct";
+import { Product } from "../../../types/Product";
 
 const Products: FC = () => {
   const { t } = useTranslation(["Product"]);
   const [showAddProduct, setShowAddProduct] = useState<boolean>(false);
+  const [products, setProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    /// 1. Fetch all products from DB
+    /// 2. Set them in state
+    /// 3. Show them in table
+    /// 4. Add pagination
+
+    axios.get("http://localhost:3003/api/admin/products/route").then((res) => {
+      setProducts(res.data);
+    });
+  }, [setProducts]);
+
+  const handleEditClick = (id: string) => {
+    // console.log("Edit Clicked", id);
+    alert(`Edit Clicked ${id}`);
+  };
+
+  const handleDeleteClick = (id: string) => {
+    alert(`Delete Clicked ${id}`);
+  };
+
   return (
     <div className="flex gap-2">
       <Navbar />
@@ -24,9 +49,18 @@ const Products: FC = () => {
             >
               {t("Add_Products")}
             </Button>
+            <div className="mt-5">
+              {products.map((product) => (
+                <ProductComp
+                  key={product._id}
+                  {...product}
+                  handleEditClick={handleEditClick}
+                  handleDeleteClick={handleDeleteClick}
+                />
+              ))}
+            </div>
           </>
         )}
-        {/* ********************************** Add Product Comp *********************** */}
       </div>
     </div>
   );

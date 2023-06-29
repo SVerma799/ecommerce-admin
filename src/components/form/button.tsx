@@ -14,7 +14,7 @@ const ButtonComponent = (props: any, ref: any) => {
   } = props;
   return (
     <button
-      className={`flex items-center justify-center bg-indigo-800  hover:text-slate-950  border-2 border-transparent hover:border-indigo-800  hover:bg-slate-50 gap-2 text-white rounded-md p-4 ${buttonClass}`}
+      className={`flex items-center justify-center bg-indigo-800  hover:text-slate-950  border-2 border-transparent hover:border-indigo-800  hover:bg-slate-50 gap-2 text-white rounded-md p-3 ${buttonClass}`}
       {...inputProps}
       required={required}
       ref={ref}

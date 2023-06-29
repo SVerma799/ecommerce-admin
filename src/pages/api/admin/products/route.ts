@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Product } from "../../../../../Models/Product";
 import { connectMongoose } from "../../../../../database/mongoose";
+import { Category } from "../../../../../Models/Category";
 
 /**
  * Handles the requests to the /api/admin/products route
@@ -53,13 +54,16 @@ async function HandlePostRequest(req: NextApiRequest, res: NextApiResponse) {
 async function HandleGetRequest(req: NextApiRequest, res: NextApiResponse) {
   try {
     let products: typeof Product | (typeof Product)[] | null;
+    await Category.find({});
     if (req.query?.id) {
-      products = await Product.findOne({ _id: req.query.id });
+      products = await Product.findOne({ _id: req.query.id }).populate(
+        "category"
+      );
     } else {
       products = await Product.find({}).populate("category");
     }
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({ error });
+    res.status(500).json(error);
   }
 }
