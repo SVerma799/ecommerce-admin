@@ -43,6 +43,13 @@ in the getStaticPath make sure to send the localized file values.
 
 now you are ready to use the translation.
 
+## Image Upload Handling in the Project.
+
+-- Several Approaches could i have taken but the best one yet is to store the Images in Amazon S3 storage.
+But for a small scale project I dont wanted to do this.
+
+-- Therefore I used multer as a file System storage to save the Images in the public directory in the Server Side.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

@@ -13,14 +13,14 @@ const ProductComp: FC<ProductCompProps> = ({
   handleDeleteClick,
   ...products
 }) => (
-  <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-950 dark:border-gray-700 p-4">
+  <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-950 dark:border-gray-700 p-4 dark:hover:bg-gradient-to-t dark:hover:from-indigo-800 dark:hover:to-black">
     {/* <Link>
-      <Image
-        className="p-8 rounded-t-lg"
-        src="/docs/images/products/apple-watch.png"
-        alt="product image"
-      />
-    </Link> */}
+    <Image
+      className="p-8 rounded-t-lg"
+      src="/docs/images/products/apple-watch.png"
+      alt="product image"
+    />
+  </Link> */}
     <div>
       <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
         {products.name}
@@ -35,43 +35,23 @@ const ProductComp: FC<ProductCompProps> = ({
           ${products.price}
         </span>
         {/* <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          Edit
-        </button>{" "} */}
+        Edit
+      </button>{" "} */}
         <div className="flex gap-4">
           <Button onClick={() => handleEditClick(products._id)}>Edit</Button>
           <Button
-            buttonClass=" bg-red-800"
+            buttonClass=" bg-red-800 hover:border-red-800"
             onClick={() => handleDeleteClick(products._id)}
           >
             Delete
           </Button>
         </div>
         {/* <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          Delete
-        </button> */}
+        Delete
+      </button> */}
       </div>
     </div>
   </div>
 );
 
 export default ProductComp;
-//   <div className="product-card">
-//     <h2 className="product-title">{products.name}</h2>
-//     <p className="product-price">Price: {products.price}</p>
-//     <p className="product-description">{products.description}</p>
-//     <p className="product-category">Category: {products.category.title}</p>
-//     <div className="button-container">
-//       <button
-//         className="edit-button"
-//         onClick={() => handleEditClick(products._id)}
-//       >
-//         Edit
-//       </button>
-//       <button
-//         className="delete-button"
-//         onClick={() => handleDeleteClick(products._id)}
-//       >
-//         Delete
-//       </button>
-//     </div>
-//   </div>
