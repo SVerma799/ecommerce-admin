@@ -1,15 +1,17 @@
+import React, { FC, KeyboardEvent, useEffect, useState } from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { useTranslation } from "next-i18next";
+import axios from "axios";
+
 import {
   ImageField,
   InputField,
   TextAreaField,
 } from "@/components/form/InputField";
 import { SelectField } from "@/components/form/Select";
-import axios from "axios";
 import { Button } from "@/components/form/button";
-import { useTranslation } from "next-i18next";
-import React, { FC, KeyboardEvent, useEffect, useState } from "react";
-import { FormProvider, useForm } from "react-hook-form";
 import { BsArrowLeft } from "react-icons/bs";
+
 import { Product } from "../../../../types/Product";
 import { Category } from "../../../../types/Category";
 
@@ -46,7 +48,7 @@ const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
       }
     };
     fetchCategories();
-  }, [setCategories]);
+  }, [setCategories, setProductFormState]);
 
   // *************** HOOKS ARAE ENDS HERE *******************
 
@@ -58,6 +60,10 @@ const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
    * @param {*} e
    */
   const onFileChange = (e: any) => {
+    const File = e.target.files[0];
+
+    if (!File) return;
+
     const reader = new FileReader();
     reader.onload = (readerEvent) => {
       const binaryData = readerEvent.target?.result;
@@ -69,6 +75,7 @@ const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
         });
       }
     };
+
     reader.readAsBinaryString(e.target.files[0]);
   };
 
@@ -144,7 +151,7 @@ const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
                 onChange={(e: any) => {
                   setProductFormState({
                     ...productformState,
-                    name: e.target.value,
+                    [e.target.name]: e.target.value,
                   });
                 }}
               />
@@ -163,7 +170,7 @@ const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
                 onChange={(e: any) =>
                   setProductFormState({
                     ...productformState,
-                    description: e.target.value,
+                    [e.target.name]: e.target.value,
                   })
                 }
               />
@@ -181,7 +188,7 @@ const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
                 onChange={(e: any) =>
                   setProductFormState({
                     ...productformState,
-                    price: e.target.value,
+                    [e.target.name]: e.target.value,
                   })
                 }
               />
@@ -198,7 +205,7 @@ const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
                 onChange={(e: any) =>
                   setProductFormState({
                     ...productformState,
-                    category: e.target.value,
+                    [e.target.name]: e.target.value,
                   })
                 }
               >
