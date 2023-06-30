@@ -7,22 +7,30 @@ import { SelectField } from "@/components/form/Select";
 import axios from "axios";
 import { Button } from "@/components/form/button";
 import { useTranslation } from "next-i18next";
-import { FC, KeyboardEvent, useEffect, useState } from "react";
+import React, { FC, KeyboardEvent, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { BsArrowLeft } from "react-icons/bs";
 import { Product } from "../../../../types/Product";
 import { Category } from "../../../../types/Category";
+
+interface AddProductProps {
+  setShowAddProduct: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 /**
  * Add product component
  *
  * @return {*}
  */
-const AddProduct: FC = () => {
+const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
   const { t } = useTranslation(["Product"]);
-  const [productformState, setProductFormState] = useState<Product>(
-    {} as Product
-  );
-
+  const [productformState, setProductFormState] = useState<Product>({
+    name: "",
+    description: "",
+    price: 0,
+    category: {} as Category,
+    image: "",
+  } as Product);
   const [categories, setCategories] = useState<Category[]>([] as Category[]);
 
   // *************** HOOKS AREA STARTS HERE *****************
@@ -30,6 +38,12 @@ const AddProduct: FC = () => {
     const fetchCategories = async () => {
       const { data } = await axios.get("/api/admin/category/route");
       setCategories(data);
+      if (data.length > 0) {
+        setProductFormState({
+          ...productformState,
+          category: data[0]._id,
+        });
+      }
     };
     fetchCategories();
   }, [setCategories]);
@@ -64,7 +78,7 @@ const AddProduct: FC = () => {
       name: "",
       description: "",
       price: 0,
-      category: "",
+      category: {} as Category,
       image: "",
     },
   });
@@ -106,6 +120,13 @@ const AddProduct: FC = () => {
 
   return (
     <div>
+      <Button
+        buttonClass="py-2 w-[8%] flex-row-reverse mb-3"
+        icon={BsArrowLeft}
+        onClick={() => setShowAddProduct(false)}
+      >
+        Back
+      </Button>
       <h1 className="text-lg mb-5">{t("NewProduct")}</h1>
       <FormProvider {...form}>
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -126,7 +147,6 @@ const AddProduct: FC = () => {
                     name: e.target.value,
                   });
                 }}
-                defaultValue={productformState.name}
               />
               <TextAreaField
                 label={t("Description")}
@@ -146,7 +166,6 @@ const AddProduct: FC = () => {
                     description: e.target.value,
                   })
                 }
-                defaultValue={productformState.description}
               />
               <InputField
                 label={t("Price")}
@@ -165,7 +184,6 @@ const AddProduct: FC = () => {
                     price: e.target.value,
                   })
                 }
-                defaultValue={productformState.price}
               />
             </div>
             <div className=" w-1/2 flex flex-col gap-6 h-full self-baseline">

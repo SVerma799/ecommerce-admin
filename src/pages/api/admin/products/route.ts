@@ -67,3 +67,11 @@ async function HandleGetRequest(req: NextApiRequest, res: NextApiResponse) {
     res.status(500).json(error);
   }
 }
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "4mb", // Set desired value here
+    },
+  },
+};

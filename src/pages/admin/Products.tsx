@@ -14,11 +14,6 @@ const Products: FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    /// 1. Fetch all products from DB
-    /// 2. Set them in state
-    /// 3. Show them in table
-    /// 4. Add pagination
-
     axios.get("http://localhost:3003/api/admin/products/route").then((res) => {
       setProducts(res.data);
     });
@@ -39,7 +34,7 @@ const Products: FC = () => {
       <div className="w-full flex flex-col p-7">
         {/* ********************************** Add Product Comp *********************** */}
         {showAddProduct ? (
-          <AddProduct />
+          <AddProduct setShowAddProduct={setShowAddProduct} />
         ) : (
           <>
             <h1 className="text-3xl">{t("Products")}</h1>
@@ -49,7 +44,7 @@ const Products: FC = () => {
             >
               {t("Add_Products")}
             </Button>
-            <div className="mt-5">
+            <div className="mt-5 flex flex-row flex-wrap gap-5">
               {products.map((product) => (
                 <ProductComp
                   key={product._id}
