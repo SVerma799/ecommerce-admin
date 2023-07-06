@@ -1,5 +1,5 @@
-import { FC, useState, useEffect } from "react";
-import axios from "axios";
+import { FC, useEffect, useState } from "react";
+import useSWR from "swr";
 import Navbar from "@/components/Navbar";
 import { Button } from "@/components/form/button";
 import { useTranslation } from "next-i18next";
@@ -7,17 +7,24 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import ProductComp from "@/components/admin/Products/ProductComp";
 import AddProduct from "@/components/admin/Products/AddProduct";
 import { Product } from "../../../types/Product";
+import fetcher from "../../../helpers/axios/fetcher";
 
 const Products: FC = () => {
   const { t } = useTranslation(["Product"]);
   const [showAddProduct, setShowAddProduct] = useState<boolean>(false);
   const [products, setProducts] = useState<Product[]>([]);
 
+  const { data, error } = useSWR("/api/admin/products/route", fetcher, {
+    dedupingInterval: 5000, // Set the deduping interval to 5 seconds (5000 milliseconds)
+  });
   useEffect(() => {
-    axios.get("http://localhost:3003/api/admin/products/route").then((res) => {
-      setProducts(res.data);
-    });
-  }, [setProducts]);
+    if (data) {
+      setProducts(data);
+    }
+    if (error) {
+      // console.log(error);
+    }
+  }, [data]);
 
   const handleEditClick = (id: string) => {
     // console.log("Edit Clicked", id);

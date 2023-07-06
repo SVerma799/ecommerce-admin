@@ -2,7 +2,6 @@ import React, { FC, KeyboardEvent, useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useTranslation } from "next-i18next";
 import axios from "axios";
-
 import {
   ImageField,
   InputField,
@@ -99,7 +98,6 @@ const AddProduct: FC<AddProductProps> = ({ setShowAddProduct }) => {
    */
   const onSubmit = async () => {
     await axios.post("/api/admin/products/route", productformState);
-
     // Reset form
     form.reset();
 
