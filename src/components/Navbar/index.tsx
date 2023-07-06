@@ -1,6 +1,6 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { useRouter, usePathname } from "next/navigation";
 import { FC, useState } from "react";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
@@ -12,6 +12,7 @@ import {
   MdFavoriteBorder,
   MdOutlineSettings,
 } from "react-icons/md";
+import Image from "next/image";
 import { FaRegUserCircle } from "react-icons/fa";
 import cn from "classnames";
 import { useTranslation } from "next-i18next";
@@ -235,13 +236,32 @@ const Navbar: FC = () => {
                 })}
                 onClick={() => push(`/auth/signin?callbackUrl=${usePathname}`)}
               >
-                <FaRegUserCircle className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
+                {session && session?.user?.image ? (
+                  <Image
+                    src={session.user.image}
+                    alt="Picture of the author"
+                    width={32}
+                    height={32}
+                    className="rounded-full w-7 h-7"
+                  />
+                ) : (
+                  <FaRegUserCircle className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
+                )}
               </button>
-              {!collapsed && (
-                <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
-                  {session ? t("SignOut") : t("SignIn")}
-                </text>
-              )}
+              {!collapsed &&
+                (session ? (
+                  <button
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
+                    SignOut
+                  </button>
+                ) : (
+                  <text className="transition delay-75 duration-100 ease-in-out text-md text-slate-950 dark:text-white">
+                    {t("SignIn")}
+                  </text>
+                ))}
             </div>
           </div>
           {/* ***************************************** */}
