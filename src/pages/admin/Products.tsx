@@ -9,6 +9,11 @@ import AddProduct from "@/components/admin/Products/AddProduct";
 import { Product } from "../../../types/Product";
 import fetcher from "../../../helpers/axios/fetcher";
 
+/**
+ * Product Route Page.
+ *
+ * @return {*}
+ */
 const Products: FC = () => {
   const { t } = useTranslation(["Product"]);
   const [showAddProduct, setShowAddProduct] = useState<boolean>(false);
