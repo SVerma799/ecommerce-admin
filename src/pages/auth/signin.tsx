@@ -31,7 +31,7 @@ const SignIn = () => {
   if (session) {
     setTimeout(() => {
       push("/");
-    }, 1000);
+    }, 500);
 
     return (
       <div className="flex font-signika flex-col items-center justify-center h-screen ">

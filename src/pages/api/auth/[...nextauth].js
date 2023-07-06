@@ -28,11 +28,16 @@ export default NextAuth({
     signIn: "/auth/signin",
   },
   callbacks: {
-    async session(session, user) {
-      if (user && adminEmails.included(user?.email)) {
+    async session(session) {
+      if (session && adminEmails.includes(session?.user?.email)) {
         return session;
       } else {
-        return false;
+        return {
+          redirect: {
+            destination: "/",
+            permanent: false,
+          },
+        };
       }
     },
   },
