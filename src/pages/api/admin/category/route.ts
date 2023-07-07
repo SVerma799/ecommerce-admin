@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Category } from "../../../../../Models/Category";
 import { connectMongoose } from "../../../../../database/mongoose";
+import checkSession from "../../../../../helpers/authentication";
 
 /**
  * Handles the requests to the /api/admin/category route
@@ -14,6 +15,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { method } = req;
+
+  if (!(await checkSession(req, res))) return;
   await connectMongoose();
 
   switch (method) {

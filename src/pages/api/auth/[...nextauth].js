@@ -32,12 +32,7 @@ export default NextAuth({
       if (session && adminEmails.includes(session?.user?.email)) {
         return session;
       } else {
-        return {
-          redirect: {
-            destination: "/",
-            permanent: false,
-          },
-        };
+        return false;
       }
     },
   },

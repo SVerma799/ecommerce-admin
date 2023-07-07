@@ -109,9 +109,9 @@ const Navbar: FC = () => {
                 <MdOutlineSpaceDashboard className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className="transition delay-75 duration-100 ease-in-out text-md  text-slate-950 dark:text-white">
+                <p className="transition delay-75 duration-100 ease-in-out text-md  text-slate-950 dark:text-white">
                   {t("Dashboard")}
-                </text>
+                </p>
               )}
             </div>
             <div
@@ -135,9 +135,9 @@ const Navbar: FC = () => {
                 <RiProductHuntLine className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className="transition delay-75 duration-100 ease-in-out text-md  text-slate-950 dark:text-white">
+                <p className="transition delay-75 duration-100 ease-in-out text-md  text-slate-950 dark:text-white">
                   {t("Products")}
-                </text>
+                </p>
               )}
             </div>
             <div
@@ -161,9 +161,9 @@ const Navbar: FC = () => {
                 <MdFavoriteBorder className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className=" transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
+                <p className=" transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
                   {t("Orders")}
-                </text>
+                </p>
               )}
             </div>
             <div
@@ -187,9 +187,9 @@ const Navbar: FC = () => {
                 <AiOutlineUnorderedList className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
+                <p className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
                   {t("Categories")}
-                </text>
+                </p>
               )}
             </div>
             <div
@@ -213,9 +213,9 @@ const Navbar: FC = () => {
                 <MdOutlineSettings className="w-7 h-7 hover:fill-indigo-900 text-slate-950 dark:text-white" />
               </button>
               {!collapsed && (
-                <text className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
+                <p className="transition delay-75 duration-100 ease-in-out  text-md  text-slate-950 dark:text-white">
                   {t("Settings")}
-                </text>
+                </p>
               )}
             </div>
             <div
@@ -258,9 +258,9 @@ const Navbar: FC = () => {
                     SignOut
                   </button>
                 ) : (
-                  <text className="transition delay-75 duration-100 ease-in-out text-md text-slate-950 dark:text-white">
+                  <p className="transition delay-75 duration-100 ease-in-out text-md text-slate-950 dark:text-white">
                     {t("SignIn")}
-                  </text>
+                  </p>
                 ))}
             </div>
           </div>

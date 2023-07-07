@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { Product } from "../../../../../Models/Product";
 import { connectMongoose } from "../../../../../database/mongoose";
 import { Category } from "../../../../../Models/Category";
+import checkSession from "../../../../../helpers/authentication";
 
 /**
  * Handles the requests to the /api/admin/products route
@@ -14,6 +15,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  if (!(await checkSession(req, res))) return;
   const { method } = req;
   await connectMongoose();
 
